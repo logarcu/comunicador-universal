@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- Forzar color de esquema claro para anular el modo oscuro del móvil -->
     <meta name="color-scheme" content="only light">
-    <title>Comunicador E-TRAN Universal</title>
+    <title>Comunicador</title>
     
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#f0f0f0">
@@ -23,34 +23,32 @@
             overflow: hidden; color-scheme: light;
         }
 
-        /* --- PANTALLA MENÚ DE INICIO --- */
         #main-menu {
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             height: 100%; width: 100%; gap: 4vh; padding: 4vh 4vw;
-            background-color: #f0f0f0;
+            background-color: #f0f0f0 !important;
         }
 
         .menu-btn {
             flex: 1; width: 100%; max-width: 800px;
-            background: #ffffff; border: 6px solid #333; border-radius: 25px;
+            background: #ffffff !important; border: 6px solid #333 !important; border-radius: 25px;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            font-size: 6vh; font-weight: bold; color: #333; cursor: pointer;
+            font-size: 6vh; font-weight: bold; color: #333 !important; cursor: pointer;
             box-shadow: 0 8px 15px rgba(0,0,0,0.1); transition: transform 0.2s, background 0.3s;
             text-align: center;
         }
-        .menu-btn span { font-size: 3vh; font-weight: normal; color: #666; margin-top: 1vh; }
+        .menu-btn span { font-size: 3vh; font-weight: normal; color: #666 !important; margin-top: 1vh; }
         .menu-btn:active { transform: scale(0.95); }
         .menu-btn:focus { 
             outline: 8px solid #00AAFF; transform: scale(1.02); 
-            box-shadow: 0 0 25px rgba(0, 170, 255, 0.6); background: #f8fcf8;
+            box-shadow: 0 0 25px rgba(0, 170, 255, 0.6);
         }
 
-        /* --- CONTENEDOR DEL COMUNICADOR --- */
         #app-container {
             display: none; 
             flex-direction: column; justify-content: space-between;
             height: 100vh; height: 100dvh; width: 100%; padding: 1vh 2vw;
-            background-color: #f0f0f0;
+            background-color: #f0f0f0 !important;
             cursor: pointer;
         }
 
@@ -73,19 +71,19 @@
         }
         .block:active { transform: scale(0.95); }
 
-        .b-blue { border-color: #0033CC; }
-        .b-yellow { border-color: #CCCC00; }
-        .b-white { border-color: #888888; box-shadow: 0 0 0 3px #000, inset 0 0 0 3px #000; } 
-        .b-green { border-color: #008000; }
-        .b-black { border-color: #000000; }
-        .b-red { border-color: #CC0000; }
+        .b-blue { border-color: #0033CC !important; }
+        .b-yellow { border-color: #CCCC00 !important; }
+        .b-white { border-color: #888888 !important; box-shadow: 0 0 0 3px #000, inset 0 0 0 3px #000; } 
+        .b-green { border-color: #008000 !important; }
+        .b-black { border-color: #000000 !important; }
+        .b-red { border-color: #CC0000 !important; }
 
-        .c-blue { color: #0033CC; }
-        .c-yellow { color: #999900; text-shadow: 1px 1px 1px #fff; }
-        .c-white { color: #555555; text-shadow: 1px 1px 1px #fff; }
-        .c-green { color: #008000; }
-        .c-black { color: #000000; }
-        .c-red { color: #CC0000; }
+        .c-blue { color: #0033CC !important; }
+        .c-yellow { color: #999900 !important; text-shadow: 1px 1px 1px #fff; }
+        .c-white { color: #555555 !important; text-shadow: 1px 1px 1px #fff; }
+        .c-green { color: #008000 !important; }
+        .c-black { color: #000000 !important; }
+        .c-red { color: #CC0000 !important; }
 
         .letters { width: 100%; height: 100%; border-collapse: collapse; table-layout: fixed; pointer-events: none; }
         .letters td { font-size: 7.5vmin; line-height: 1; font-weight: bold; text-align: center; vertical-align: middle; }
@@ -97,7 +95,8 @@
         }
         .text-box {
             width: 90%; height: 100%; font-size: 5vh; padding: 0 20px;
-            border: 3px solid #333; border-radius: 12px; background: #ffffff !important; color: #000 !important;
+            border: 3px solid #333 !important; border-radius: 12px; 
+            background: #ffffff !important; color: #000000 !important;
             display: flex; align-items: center; justify-content: flex-end;
             overflow: hidden; white-space: pre; 
             box-shadow: 0 3px 5px rgba(0,0,0,0.1); transition: all 0.3s;
@@ -108,14 +107,15 @@
             height: 11vh; width: 100%; flex-shrink: 0; margin-bottom: 0.5vh;
         }
         .btn {
-            flex: 1; border: 3px solid #333; border-radius: 12px; background: #ffffff !important;
+            flex: 1; border: 3px solid #333 !important; border-radius: 12px; 
+            background: #ffffff !important; color: #000000 !important;
             display: flex; justify-content: center; align-items: center; font-size: 6.5vh;
             cursor: pointer; transition: all 0.3s;
         }
         .btn:active { transform: scale(0.95); }
-        .btn-delete { color: #CC0000; }
-        .btn-space { color: #000; }
-        .btn-accept { color: #008000; font-weight: bold; }
+        .btn-delete { color: #CC0000 !important; }
+        .btn-space { color: #000000 !important; }
+        .btn-accept { color: #008000 !important; font-weight: bold; }
 
         .scanning-active {
             background-color: #ffeb3b !important; border-color: #ff9800 !important;
@@ -129,6 +129,22 @@
             font-size: 14px; z-index: 9999; text-align: center; font-weight: bold;
         }
         #webcam-video { display: none; }
+
+        /* BLINDAJE CONTRA EL MODO OSCURO DEL SISTEMA ANDROID */
+        @media (prefers-color-scheme: dark) {
+            html, body, #main-menu, #app-container { background-color: #f0f0f0 !important; color: #000000 !important; }
+            .block, .menu-btn, .text-box, .btn { background-color: #ffffff !important; color: #000000 !important; border-color: #333333 !important; }
+            .b-blue { border-color: #0033CC !important; }
+            .b-yellow { border-color: #CCCC00 !important; }
+            .b-white { border-color: #888888 !important; }
+            .b-green { border-color: #008000 !important; }
+            .b-black { border-color: #000000 !important; }
+            .b-red { border-color: #CC0000 !important; }
+            .btn-delete { color: #CC0000 !important; }
+            .btn-space { color: #000000 !important; }
+            .btn-accept { color: #008000 !important; }
+            .menu-btn span { color: #666666 !important; }
+        }
     </style>
 </head>
 <body>
@@ -149,7 +165,7 @@
         </div>
     </div>
 
-    <!-- COMUNICADOR E-TRAN -->
+    <!-- CONTENEDOR DEL COMUNICADOR -->
     <div id="app-container">
         <div id="status-msg" style="display:none;"></div>
         <video id="webcam-video" autoplay playsinline></video>
@@ -200,6 +216,7 @@
         let activeBlock = null; 
         let actionState = 'IDLE'; 
         let inputBlocked = false; 
+        let lastClickTime = 0; // Filtro anti-rebote para el mando de la TV
 
         const textBox = document.getElementById('text-box');
         const statusMsg = document.getElementById('status-msg');
@@ -263,13 +280,14 @@
         }
 
         document.getElementById('app-container').addEventListener('click', () => {
-            if (appMode === 'SECUENCIAL') {
-                triggerSequentialAction();
-            }
+            if (appMode === 'SECUENCIAL') triggerSequentialAction();
         });
 
         function executeSelection(id) {
-            if (inputBlocked) return;
+            let now = Date.now();
+            // Evitar clics dobles del mando (rebote) con un margen de 300 milisegundos
+            if (inputBlocked || (now - lastClickTime < 300)) return;
+            lastClickTime = now;
 
             if (id.startsWith('b-') && id !== 'b-delete' && id !== 'b-space' && id !== 'b-accept') {
                 let colorClicked = id.replace('b-', '');
@@ -355,6 +373,7 @@
         document.addEventListener('keydown', function(event) {
             if (appMode === null || appMode === 'TV' || appMode === 'MANUAL') {
                 if (event.key === 'Enter') {
+                    event.preventDefault();
                     const activeElement = document.activeElement;
                     if (activeElement && activeElement.hasAttribute('tabindex')) {
                         activeElement.click();
@@ -387,7 +406,6 @@
             scanTimer = setInterval(() => {
                 scanList = getActiveScanList();
                 if (scanList.length === 0) return;
-
                 document.querySelectorAll('.scanning-active').forEach(el => el.classList.remove('scanning-active'));
                 scanIndex = scanIndex % scanList.length;
                 let currentId = scanList[scanIndex];
@@ -400,10 +418,8 @@
             if (inputBlocked) return;
             scanList = getActiveScanList();
             if (scanList.length === 0) return;
-            
             let targetedIndex = (scanIndex - 1 + scanList.length) % scanList.length;
             let selectedId = scanList[targetedIndex];
-
             executeSelection(selectedId);
             startScanning(); 
         }
@@ -422,11 +438,9 @@
         function onResults(results) {
             if (appMode !== 'SECUENCIAL') return;
             if (!results.multiFaceLandmarks || results.multiFaceLandmarks.length === 0) return;
-            
             let upperLip = results.multiFaceLandmarks[0][13];
             let lowerLip = results.multiFaceLandmarks[0][14];
             let mouthOpenDist = Math.hypot(upperLip.x - lowerLip.x, upperLip.y - lowerLip.y);
-
             if (mouthOpenDist > 0.08) {
                 triggerActionWithDebounce();
             }
@@ -434,27 +448,17 @@
 
         async function initCameraSystem() {
             try {
-                const faceMesh = new FaceMesh({
-                    locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`
-                });
-                
-                faceMesh.setOptions({
-                    maxNumFaces: 1, refineLandmarks: true,
-                    minDetectionConfidence: 0.6, minTrackingConfidence: 0.6
-                });
-                
+                const faceMesh = new FaceMesh({ locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}` });
+                faceMesh.setOptions({ maxNumFaces: 1, refineLandmarks: true, minDetectionConfidence: 0.6, minTrackingConfidence: 0.6 });
                 faceMesh.onResults(onResults);
-
                 const camera = new Camera(videoElement, {
                     onFrame: async () => { await faceMesh.send({image: videoElement}); },
                     width: 640, height: 480
                 });
-
                 await camera.start();
                 statusMsg.style.background = '#008000';
                 statusMsg.innerText = "¡Cámara activada! Abre la boca para seleccionar.";
                 setTimeout(() => statusMsg.style.display = 'none', 3000);
-
             } catch (error) {
                 statusMsg.style.background = '#d9534f';
                 statusMsg.innerText = "Cámara no disponible (Usa toque o barra espaciadora)";
