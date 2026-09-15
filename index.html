@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- Forzar color de esquema claro para anular el modo oscuro del móvil -->
     <meta name="color-scheme" content="only light">
     <title>Comunicador</title>
     
@@ -16,7 +15,6 @@
     <style>
         * { box-sizing: border-box; font-family: Arial, sans-serif; user-select: none; }
         
-        /* FORZAR FONDO CLARO ABSOLUTO */
         html, body { 
             margin: 0; padding: 0; height: 100vh; height: 100dvh; 
             background-color: #f0f0f0 !important; color: #000000 !important;
@@ -25,7 +23,7 @@
 
         #main-menu {
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            height: 100%; width: 100%; gap: 4vh; padding: 4vh 4vw;
+            height: 100%; width: 100%; gap: 3vh; padding: 4vh 4vw;
             background-color: #f0f0f0 !important;
         }
 
@@ -33,29 +31,25 @@
             flex: 1; width: 100%; max-width: 800px;
             background: #ffffff !important; border: 6px solid #333 !important; border-radius: 25px;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            font-size: 6vh; font-weight: bold; color: #333 !important; cursor: pointer;
+            font-size: 5vh; font-weight: bold; color: #333 !important; cursor: pointer;
             box-shadow: 0 8px 15px rgba(0,0,0,0.1); transition: transform 0.2s, background 0.3s;
-            text-align: center;
+            text-align: center; min-height: 15vh;
         }
-        .menu-btn span { font-size: 3vh; font-weight: normal; color: #666 !important; margin-top: 1vh; }
+        .menu-btn.small {
+            flex: 0.5; font-size: 3vh; min-height: 10vh; border-width: 4px !important;
+            background: #e3f2fd !important;
+        }
+        .menu-btn span { font-size: 2.5vh; font-weight: normal; color: #666 !important; margin-top: 1vh; }
         .menu-btn:active { transform: scale(0.95); }
-        .menu-btn:focus { 
-            outline: 8px solid #00AAFF; transform: scale(1.02); 
-            box-shadow: 0 0 25px rgba(0, 170, 255, 0.6);
-        }
+        .menu-btn:focus { outline: 8px solid #00AAFF; transform: scale(1.02); box-shadow: 0 0 25px rgba(0, 170, 255, 0.6); }
 
         #app-container {
-            display: none; 
-            flex-direction: column; justify-content: space-between;
+            display: none; flex-direction: column; justify-content: space-between;
             height: 100vh; height: 100dvh; width: 100%; padding: 1vh 2vw;
-            background-color: #f0f0f0 !important;
-            cursor: pointer;
+            background-color: #f0f0f0 !important; cursor: pointer;
         }
 
-        .row { 
-            display: flex; justify-content: space-evenly; align-items: center; 
-            width: 100%; gap: 2vw; flex: 1; max-height: 27vh;
-        }
+        .row { display: flex; justify-content: space-evenly; align-items: center; width: 100%; gap: 2vw; flex: 1; max-height: 27vh; }
         
         .block { 
             border-width: 1.2vmin; border-style: solid; border-radius: 16px; 
@@ -65,10 +59,7 @@
             transition: transform 0.2s, background-color 0.3s, outline 0.1s;
         }
         
-        .block:focus, .btn:focus, .text-box:focus {
-            outline: 6px solid #00AAFF; transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 170, 255, 0.6);
-        }
+        .block:focus, .btn:focus, .text-box:focus { outline: 6px solid #00AAFF; transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 170, 255, 0.6); }
         .block:active { transform: scale(0.95); }
 
         .b-blue { border-color: #0033CC !important; }
@@ -89,10 +80,7 @@
         .letters td { font-size: 7.5vmin; line-height: 1; font-weight: bold; text-align: center; vertical-align: middle; }
         .single-letter { font-size: 18vmin; font-weight: bold; pointer-events: none; }
 
-        .text-container {
-            display: flex; justify-content: center; align-items: center;
-            height: 9vh; width: 100%; margin: 0.5vh 0; flex-shrink: 0;
-        }
+        .text-container { display: flex; justify-content: center; align-items: center; height: 9vh; width: 100%; margin: 0.5vh 0; flex-shrink: 0; }
         .text-box {
             width: 90%; height: 100%; font-size: 5vh; padding: 0 20px;
             border: 3px solid #333 !important; border-radius: 12px; 
@@ -102,10 +90,7 @@
             box-shadow: 0 3px 5px rgba(0,0,0,0.1); transition: all 0.3s;
         }
         
-        .controls { 
-            display: flex; justify-content: space-evenly; gap: 2vw; 
-            height: 11vh; width: 100%; flex-shrink: 0; margin-bottom: 0.5vh;
-        }
+        .controls { display: flex; justify-content: space-evenly; gap: 2vw; height: 11vh; width: 100%; flex-shrink: 0; margin-bottom: 0.5vh; }
         .btn {
             flex: 1; border: 3px solid #333 !important; border-radius: 12px; 
             background: #ffffff !important; color: #000000 !important;
@@ -117,20 +102,19 @@
         .btn-space { color: #000000 !important; }
         .btn-accept { color: #008000 !important; font-weight: bold; }
 
-        .scanning-active {
-            background-color: #ffeb3b !important; border-color: #ff9800 !important;
-            transform: scale(1.02); box-shadow: 0 0 15px rgba(255, 152, 0, 0.8);
-        }
+        .scanning-active { background-color: #ffeb3b !important; border-color: #ff9800 !important; transform: scale(1.02); box-shadow: 0 0 15px rgba(255, 152, 0, 0.8); }
         .highlighted { background-color: #ffeb3b !important; border-color: #ff9800 !important; }
 
         #status-msg {
             position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
-            background: #222; color: #fff; padding: 8px 15px; border-radius: 8px;
-            font-size: 14px; z-index: 9999; text-align: center; font-weight: bold;
+            background: #222; color: #fff; padding: 12px 20px; border-radius: 8px;
+            font-size: 16px; z-index: 9999; text-align: center; font-weight: bold;
         }
         #webcam-video { display: none; }
+        
+        @keyframes blink { 50% { opacity: 0; } }
+        .blink-text { animation: blink 1.2s step-start infinite; color: #999 !important; }
 
-        /* BLINDAJE CONTRA EL MODO OSCURO DEL SISTEMA ANDROID */
         @media (prefers-color-scheme: dark) {
             html, body, #main-menu, #app-container { background-color: #f0f0f0 !important; color: #000000 !important; }
             .block, .menu-btn, .text-box, .btn { background-color: #ffffff !important; color: #000000 !important; border-color: #333333 !important; }
@@ -149,23 +133,22 @@
 </head>
 <body>
 
-    <!-- MENÚ PRINCIPAL DE SELECCIÓN -->
     <div id="main-menu">
-        <div class="menu-btn" tabindex="0" onclick="startApp('MANUAL')">
-            Modo MANUAL
-            <span>(Tocar pantalla o Ratón)</span>
+        <div class="menu-btn" tabindex="0" onclick="attemptStartApp('MANUAL')">
+            Modo MANUAL<span>(Tocar pantalla o Ratón)</span>
         </div>
-        <div class="menu-btn" tabindex="0" onclick="startApp('SECUENCIAL')">
-            Modo SECUENCIAL
-            <span>(Cámara o Pulsador global)</span>
+        <div class="menu-btn" tabindex="0" onclick="attemptStartApp('SECUENCIAL')">
+            Modo SECUENCIAL<span>(Cámara o Pulsador global)</span>
         </div>
-        <div class="menu-btn" tabindex="0" onclick="startApp('TV')">
-            Modo TELEVISIÓN
-            <span>(Mando a distancia con flechas)</span>
+        <div class="menu-btn" tabindex="0" onclick="attemptStartApp('TV')">
+            Modo TELEVISIÓN<span>(Mando a distancia con flechas)</span>
         </div>
+        <div class="menu-btn small" tabindex="0" onclick="document.getElementById('file-input').click()">
+            + Cargar Diccionario Local (.json)
+        </div>
+        <input type="file" id="file-input" style="display:none" accept=".json" onchange="loadLocalDictionary(event)">
     </div>
 
-    <!-- CONTENEDOR DEL COMUNICADOR -->
     <div id="app-container">
         <div id="status-msg" style="display:none;"></div>
         <video id="webcam-video" autoplay playsinline></video>
@@ -195,9 +178,7 @@
 
     <script>
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./pwabuilder-sw.js').catch(err => console.log('SW error:', err));
-            });
+            window.addEventListener('load', () => { navigator.serviceWorker.register('./pwabuilder-sw.js').catch(()=>console.log('SW error')); });
         }
 
         const dict = {
@@ -208,39 +189,130 @@
             black:  [{l:'6', c:'c-blue'}, {l:'7', c:'c-yellow'}, {l:'8', c:'c-white'}, {l:'9', c:'c-green'}, {l:'Y', c:'c-black'}, {l:'Z', c:'c-red'}],
             red:    [{l:'S', c:'c-blue'}, {l:'T', c:'c-yellow'}, {l:'U', c:'c-white'}, {l:'V', c:'c-green'}, {l:'W', c:'c-black'}, {l:'X', c:'c-red'}]
         };
-
         const colors = ['blue', 'yellow', 'white', 'green', 'black', 'red'];
         
         let appMode = null; 
         let boardState = 'MAIN'; 
         let activeBlock = null; 
-        let actionState = 'IDLE'; 
         let inputBlocked = false; 
-        let lastClickTime = 0; // Filtro anti-rebote para el mando de la TV
+        let lastClickTime = 0;
+
+        let macros = {};
+        let dictionaryLoaded = false;
+        let githubFetchFailed = false;
+        let currentText = "";
+        let currentPrediction = "";
+        
+        // Diccionario base expandido de +100 palabras comunes (medicina, necesidades y cotidianidad)
+        const defaultDict = {
+            "QUE":100, "NO":99, "SI":98, "QUIERO":97, "TENGO":96, "DUELE":95, "AGUA":94, "HOLA":93, "BIEN":92, "MAL":91, 
+            "GRACIAS":90, "AYUDA":89, "MAS":88, "MENOS":87, "AHORA":86, "LUEGO":85, "HOY":84, "MAÑANA":83, "CALOR":82, 
+            "FRIO":81, "CAMA":80, "DORMIR":79, "CANSADO":78, "SENTARSE":77, "LEVANTARSE":76, "COMIDA":75, "BAÑO":74, 
+            "TELEVISION":73, "MUSICA":72, "MEDICO":71, "ENFERMERA":70, "PASTILLA":69, "DOLOR":68, "CABEZA":67, 
+            "ESTOMAGO":66, "BRAZO":65, "PIERNA":64, "ESPALDA":63, "CUELLO":62, "RESPIRAR":61, "TOS":60, "MOCO":59, 
+            "PICOR":58, "RASCAR":57, "GAFAS":56, "ZAPATOS":55, "ROPA":54, "VESTIR":53, "DESVESTIR":52, "LIMPIAR":51, 
+            "LAVAR":50, "DUCHA":49, "BOCA":48, "DIENTES":47, "SED":46, "HAMBRE":45, "SUEÑO":44, "MIEDO":43, 
+            "ALEGRE":42, "TRISTE":41, "ENFADADO":40, "ABURRIDO":39, "TRANQUILO":38, "NERVIOSO":37, "SIEMPRE":36, 
+            "NUNCA":35, "AQUI":34, "ALLI":33, "DONDE":32, "CUANDO":31, "QUIEN":30, "COMO":29, "PORQUE":28, "MUCHO":27, 
+            "POCO":26, "TODO":25, "NADA":24, "OTRO":23, "MISMO":22, "BUENO":21, "MALO":20, "GRANDE":19, "PEQUEÑO":18, 
+            "CALIENTE":17, "NUEVO":16, "VIEJO":15, "ESPERAR":14, "VENIR":13, "IR":12, "ESTAR":11, "SER":10, "HACER":9, 
+            "DECIR":8, "PODER":7, "SABER":6, "POR":5, "FAVOR":4, "ADIOS":3, "FAMILIA":2, "MEDICAMENTO":1
+        };
+
+        // Carga frecuencias guardadas o usa el diccionario base
+        let wordFrequencies = JSON.parse(localStorage.getItem('comunicador_freqs')) || defaultDict;
 
         const textBox = document.getElementById('text-box');
         const statusMsg = document.getElementById('status-msg');
+
+        function showStatusMessage(msg, color) {
+            statusMsg.style.background = color;
+            statusMsg.innerText = msg;
+            statusMsg.style.display = 'block';
+            setTimeout(() => statusMsg.style.display = 'none', 3000);
+        }
+
+        async function attemptStartApp(mode) {
+            if (dictionaryLoaded || githubFetchFailed) {
+                startApp(mode);
+                return;
+            }
+            try {
+                showStatusMessage("Buscando diccionario...", "#f39c12");
+                let response = await fetch("diccionario.json");
+                if (response.ok) {
+                    macros = await response.json();
+                    dictionaryLoaded = true;
+                    showStatusMessage("Diccionario en la nube cargado ✔", "#27ae60");
+                    setTimeout(() => startApp(mode), 1000);
+                } else { throw new Error("No encontrado"); }
+            } catch (e) {
+                githubFetchFailed = true;
+                showStatusMessage("No se encontró diccionario. Pulsa de nuevo para entrar.", "#c0392b");
+            }
+        }
+
+        function loadLocalDictionary(event) {
+            let file = event.target.files[0];
+            if (!file) return;
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    macros = JSON.parse(e.target.result);
+                    dictionaryLoaded = true;
+                    showStatusMessage("Diccionario local cargado ✔", "#27ae60");
+                } catch(err) { showStatusMessage("Error al leer archivo", "#c0392b"); }
+            };
+            reader.readAsText(file);
+        }
+
+        function updatePrediction() {
+            currentPrediction = "";
+            let words = currentText.split(/[\s\u00A0]+/);
+            let lastWord = words[words.length - 1].toUpperCase();
+            if (lastWord.length >= 2) {
+                let bestMatch = ""; let maxFreq = -1;
+                for (let word in wordFrequencies) {
+                    if (word.startsWith(lastWord) && wordFrequencies[word] > maxFreq) {
+                        maxFreq = wordFrequencies[word];
+                        bestMatch = word;
+                    }
+                }
+                if (bestMatch && bestMatch !== lastWord) currentPrediction = bestMatch;
+            }
+        }
+
+        function updateFrequency(word) {
+            word = word.toUpperCase().trim();
+            if (word.length < 2) return;
+            wordFrequencies[word] = (wordFrequencies[word] || 0) + 1;
+            localStorage.setItem('comunicador_freqs', JSON.stringify(wordFrequencies));
+        }
+
+        function renderText() {
+            let displayHTML = currentText;
+            if (currentPrediction) {
+                let words = currentText.split(/[\s\u00A0]+/);
+                let lastWord = words[words.length - 1];
+                let remainder = currentPrediction.substring(lastWord.length);
+                displayHTML += `<span class="blink-text">${remainder}</span>`;
+            }
+            textBox.innerHTML = displayHTML;
+        }
 
         function startApp(mode) {
             appMode = mode;
             document.getElementById('main-menu').style.display = 'none';
             document.getElementById('app-container').style.display = 'flex';
-            
+            currentText = "";
+            renderText();
             renderMain();
-
-            if (appMode === 'SECUENCIAL') {
-                document.getElementById('status-msg').style.display = 'block';
-                initCameraSystem();
-                startScanning();
-            } else if (appMode === 'TV') {
-                document.getElementById('b-blue').focus();
-            }
+            if (appMode === 'SECUENCIAL') { initCameraSystem(); startScanning(); } 
+            else if (appMode === 'TV') { document.getElementById('b-blue').focus(); }
         }
 
         function renderMain() {
-            boardState = 'MAIN';
-            activeBlock = null;
-            clearHighlights();
+            boardState = 'MAIN'; activeBlock = null; clearHighlights();
             colors.forEach(color => {
                 let html = `<table class="letters"><tr>`;
                 for(let i=0; i<3; i++) html += `<td class="${dict[color][i].c}">${dict[color][i].l}</td>`;
@@ -254,9 +326,7 @@
         }
 
         function renderSub(selectedColor) {
-            boardState = 'SUB';
-            activeBlock = selectedColor;
-            clearHighlights();
+            boardState = 'SUB'; activeBlock = selectedColor; clearHighlights();
             const chars = dict[selectedColor];
             colors.forEach((color, index) => {
                 document.getElementById(`b-${color}`).innerHTML = `<span class="single-letter ${chars[index].c}">${chars[index].l}</span>`;
@@ -265,109 +335,85 @@
             if (appMode === 'TV') document.getElementById('b-blue').focus();
         }
 
-        function blockInputBriefly() {
-            inputBlocked = true;
-            setTimeout(() => { inputBlocked = false; }, 400);
-        }
+        function blockInputBriefly() { inputBlocked = true; setTimeout(() => { inputBlocked = false; }, 400); }
 
         function handleItemClick(event, id) {
-            if (appMode === 'SECUENCIAL') {
-                event.stopPropagation();
-                triggerSequentialAction();
-                return;
-            }
+            if (appMode === 'SECUENCIAL') { event.stopPropagation(); triggerSequentialAction(); return; }
             executeSelection(id);
         }
 
-        document.getElementById('app-container').addEventListener('click', () => {
-            if (appMode === 'SECUENCIAL') triggerSequentialAction();
-        });
+        document.getElementById('app-container').addEventListener('click', () => { if (appMode === 'SECUENCIAL') triggerSequentialAction(); });
 
         function executeSelection(id) {
             let now = Date.now();
-            // Evitar clics dobles del mando (rebote) con un margen de 300 milisegundos
             if (inputBlocked || (now - lastClickTime < 300)) return;
             lastClickTime = now;
 
             if (id.startsWith('b-') && id !== 'b-delete' && id !== 'b-space' && id !== 'b-accept') {
                 let colorClicked = id.replace('b-', '');
-                if (boardState === 'MAIN') {
-                    renderSub(colorClicked);
-                } else if (boardState === 'SUB') {
+                if (boardState === 'MAIN') { renderSub(colorClicked); } 
+                else if (boardState === 'SUB') {
                     const colorIndex = colors.indexOf(colorClicked);
-                    textBox.innerText += dict[activeBlock][colorIndex].l;
-                    renderMain();
+                    currentText += dict[activeBlock][colorIndex].l;
+                    updatePrediction(); renderText(); renderMain();
                 }
             }
             else if (id === 'text-box') {
-                if (textBox.innerText !== "") {
-                    boardState = 'SPEAK_PENDING';
-                    highlightElement('b-accept');
-                }
+                if (currentText !== "") { boardState = 'SPEAK_PENDING'; highlightElement('b-accept'); }
             }
             else if (id === 'b-delete') {
-                if (boardState === 'SUB') {
-                    renderMain(); 
-                } 
-                else if (boardState === 'MAIN') {
-                    boardState = 'DELETE_PENDING';
-                    highlightElement('b-accept');
-                } 
-                else {
-                    resetActions();
-                }
+                if (boardState === 'SUB') { renderMain(); } 
+                else if (boardState === 'MAIN') { boardState = 'DELETE_PENDING'; highlightElement('b-accept'); } 
+                else { resetActions(); }
             }
             else if (id === 'b-space') {
-                if (boardState === 'MAIN') {
-                    boardState = 'SPACE_PENDING';
-                    highlightElement('b-accept');
-                } 
-                else if (boardState === 'DELETE_PENDING') {
-                    boardState = 'CLEAR_PENDING';
-                    highlightElement('b-accept');
-                }
+                if (boardState === 'MAIN') { boardState = 'SPACE_PENDING'; highlightElement('b-accept'); } 
+                else if (boardState === 'DELETE_PENDING') { boardState = 'CLEAR_PENDING'; highlightElement('b-accept'); }
             }
-            else if (id === 'b-accept') {
-                confirmAction();
-            }
+            else if (id === 'b-accept') { confirmAction(); }
         }
 
-        function highlightElement(elId) {
-            clearHighlights();
-            document.getElementById(elId).classList.add('highlighted');
-            if (appMode === 'TV') document.getElementById(elId).focus();
-        }
-
-        function clearHighlights() {
-            document.querySelectorAll('.highlighted').forEach(el => el.classList.remove('highlighted'));
-        }
-
-        function resetActions() {
-            boardState = 'MAIN';
-            clearHighlights();
-            renderMain();
-        }
+        function highlightElement(elId) { clearHighlights(); document.getElementById(elId).classList.add('highlighted'); if (appMode === 'TV') document.getElementById(elId).focus(); }
+        function clearHighlights() { document.querySelectorAll('.highlighted').forEach(el => el.classList.remove('highlighted')); }
+        function resetActions() { boardState = 'MAIN'; clearHighlights(); renderMain(); }
 
         function confirmAction() {
             if (boardState === 'DELETE_PENDING') {
-                textBox.innerText = textBox.innerText.slice(0, -1);
+                currentText = currentText.slice(0, -1);
+                updatePrediction();
             } 
             else if (boardState === 'CLEAR_PENDING') {
-                textBox.innerText = "";
+                currentText = ""; currentPrediction = "";
             } 
             else if (boardState === 'SPACE_PENDING') {
-                textBox.innerText += "\u00A0"; 
+                let words = currentText.split(/[\s\u00A0]+/);
+                let lastWord = words[words.length - 1];
+                let upperLast = lastWord.toUpperCase();
+
+                if (macros[upperLast]) {
+                    currentText = currentText.substring(0, currentText.length - lastWord.length) + macros[upperLast];
+                    currentPrediction = "";
+                } 
+                else if (currentPrediction) {
+                    currentText = currentText.substring(0, currentText.length - lastWord.length) + currentPrediction;
+                    updateFrequency(currentPrediction);
+                    currentPrediction = "";
+                } 
+                else {
+                    if (lastWord.trim().length >= 2) updateFrequency(lastWord.trim());
+                }
+                currentText += "\u00A0"; 
+                updatePrediction();
             } 
             else if (boardState === 'SPEAK_PENDING') {
-                if ('speechSynthesis' in window && textBox.innerText.trim() !== "") {
+                if ('speechSynthesis' in window && currentText.trim() !== "") {
                     window.speechSynthesis.cancel();
-                    const textoParaLeer = textBox.innerText.replace(/\u00A0/g, " ");
+                    const textoParaLeer = currentText.replace(/\u00A0/g, " ");
                     const locucion = new SpeechSynthesisUtterance(textoParaLeer);
-                    locucion.lang = 'es-ES'; 
-                    window.speechSynthesis.speak(locucion);
+                    locucion.lang = 'es-ES'; window.speechSynthesis.speak(locucion);
                 }
             }
-            resetActions();
+            renderText(); resetActions();
         }
 
         document.addEventListener('keydown', function(event) {
@@ -375,41 +421,30 @@
                 if (event.key === 'Enter') {
                     event.preventDefault();
                     const activeElement = document.activeElement;
-                    if (activeElement && activeElement.hasAttribute('tabindex')) {
-                        activeElement.click();
-                    }
+                    if (activeElement && activeElement.hasAttribute('tabindex')) activeElement.click();
                 }
             }
-            if (appMode === 'SECUENCIAL' && event.code === 'Space') {
-                event.preventDefault(); 
-                triggerSequentialAction();
-            }
+            if (appMode === 'SECUENCIAL' && event.code === 'Space') { event.preventDefault(); triggerSequentialAction(); }
         });
 
-        let scanIndex = 0;
-        let scanList = [];
-        let scanInterval = 1000; 
-        let scanTimer = null;
+        let scanIndex = 0; let scanList = []; let scanInterval = 1000; let scanTimer = null;
 
         function getActiveScanList() {
             if (boardState === 'MAIN') return ['b-blue', 'b-yellow', 'b-white', 'b-green', 'b-black', 'b-red', 'b-delete', 'b-space', 'text-box'];
             else if (boardState === 'SUB') return ['b-blue', 'b-yellow', 'b-white', 'b-green', 'b-black', 'b-red', 'b-delete'];
             else if (boardState === 'DELETE_PENDING') return ['b-accept', 'b-space', 'b-delete'];
-            else if (boardState === 'CLEAR_PENDING') return ['b-accept', 'b-delete'];
-            else if (boardState === 'SPACE_PENDING' || boardState === 'SPEAK_PENDING') return ['b-accept', 'b-delete'];
+            else if (boardState === 'CLEAR_PENDING' || boardState === 'SPACE_PENDING' || boardState === 'SPEAK_PENDING') return ['b-accept', 'b-delete'];
             return [];
         }
 
         function startScanning() {
-            clearInterval(scanTimer);
-            scanIndex = 0;
+            clearInterval(scanTimer); scanIndex = 0;
             scanTimer = setInterval(() => {
                 scanList = getActiveScanList();
                 if (scanList.length === 0) return;
                 document.querySelectorAll('.scanning-active').forEach(el => el.classList.remove('scanning-active'));
                 scanIndex = scanIndex % scanList.length;
-                let currentId = scanList[scanIndex];
-                document.getElementById(currentId).classList.add('scanning-active');
+                document.getElementById(scanList[scanIndex]).classList.add('scanning-active');
                 scanIndex++;
             }, scanInterval);
         }
@@ -419,20 +454,15 @@
             scanList = getActiveScanList();
             if (scanList.length === 0) return;
             let targetedIndex = (scanIndex - 1 + scanList.length) % scanList.length;
-            let selectedId = scanList[targetedIndex];
-            executeSelection(selectedId);
+            executeSelection(scanList[targetedIndex]);
             startScanning(); 
         }
 
         const videoElement = document.getElementById('webcam-video');
         let lastTriggerTime = 0;
-
         function triggerActionWithDebounce() {
             let now = Date.now();
-            if (now - lastTriggerTime > 1200) { 
-                lastTriggerTime = now;
-                triggerSequentialAction();
-            }
+            if (now - lastTriggerTime > 1200) { lastTriggerTime = now; triggerSequentialAction(); }
         }
 
         function onResults(results) {
@@ -441,28 +471,20 @@
             let upperLip = results.multiFaceLandmarks[0][13];
             let lowerLip = results.multiFaceLandmarks[0][14];
             let mouthOpenDist = Math.hypot(upperLip.x - lowerLip.x, upperLip.y - lowerLip.y);
-            if (mouthOpenDist > 0.08) {
-                triggerActionWithDebounce();
-            }
+            if (mouthOpenDist > 0.08) triggerActionWithDebounce();
         }
 
         async function initCameraSystem() {
             try {
+                showStatusMessage("Iniciando cámara...", "#f39c12");
                 const faceMesh = new FaceMesh({ locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}` });
                 faceMesh.setOptions({ maxNumFaces: 1, refineLandmarks: true, minDetectionConfidence: 0.6, minTrackingConfidence: 0.6 });
                 faceMesh.onResults(onResults);
-                const camera = new Camera(videoElement, {
-                    onFrame: async () => { await faceMesh.send({image: videoElement}); },
-                    width: 640, height: 480
-                });
+                const camera = new Camera(videoElement, { onFrame: async () => { await faceMesh.send({image: videoElement}); }, width: 640, height: 480 });
                 await camera.start();
-                statusMsg.style.background = '#008000';
-                statusMsg.innerText = "¡Cámara activada! Abre la boca para seleccionar.";
-                setTimeout(() => statusMsg.style.display = 'none', 3000);
+                showStatusMessage("¡Cámara activada! Abre la boca para seleccionar.", "#27ae60");
             } catch (error) {
-                statusMsg.style.background = '#d9534f';
-                statusMsg.innerText = "Cámara no disponible (Usa toque o barra espaciadora)";
-                setTimeout(() => statusMsg.style.display = 'none', 4000);
+                showStatusMessage("Cámara no disponible (Usa toque o barra espaciadora)", "#c0392b");
             }
         }
     </script>
