@@ -203,7 +203,6 @@
         let currentText = "";
         let currentPrediction = "";
         
-        // Diccionario base expandido de +100 palabras comunes (medicina, necesidades y cotidianidad)
         const defaultDict = {
             "QUE":100, "NO":99, "SI":98, "QUIERO":97, "TENGO":96, "DUELE":95, "AGUA":94, "HOLA":93, "BIEN":92, "MAL":91, 
             "GRACIAS":90, "AYUDA":89, "MAS":88, "MENOS":87, "AHORA":86, "LUEGO":85, "HOY":84, "MAÑANA":83, "CALOR":82, 
@@ -219,7 +218,6 @@
             "DECIR":8, "PODER":7, "SABER":6, "POR":5, "FAVOR":4, "ADIOS":3, "FAMILIA":2, "MEDICAMENTO":1
         };
 
-        // Carga frecuencias guardadas o usa el diccionario base
         let wordFrequencies = JSON.parse(localStorage.getItem('comunicador_freqs')) || defaultDict;
 
         const textBox = document.getElementById('text-box');
@@ -359,7 +357,13 @@
                 }
             }
             else if (id === 'text-box') {
-                if (currentText !== "") { boardState = 'SPEAK_PENDING'; highlightElement('b-accept'); }
+                if (currentPrediction !== "") {
+                    boardState = 'PREDICTION_PENDING'; 
+                    highlightElement('b-accept');
+                } else if (currentText.trim() !== "") { 
+                    boardState = 'SPEAK_PENDING'; 
+                    highlightElement('b-accept'); 
+                }
             }
             else if (id === 'b-delete') {
                 if (boardState === 'SUB') { renderMain(); } 
@@ -394,17 +398,24 @@
                     currentText = currentText.substring(0, currentText.length - lastWord.length) + macros[upperLast];
                     currentPrediction = "";
                 } 
-                else if (currentPrediction) {
-                    currentText = currentText.substring(0, currentText.length - lastWord.length) + currentPrediction;
-                    updateFrequency(currentPrediction);
-                    currentPrediction = "";
-                } 
                 else {
                     if (lastWord.trim().length >= 2) updateFrequency(lastWord.trim());
                 }
                 currentText += "\u00A0"; 
                 updatePrediction();
             } 
+            else if (boardState === 'PREDICTION_PENDING') {
+                let words = currentText.split(/[\s\u00A0]+/);
+                let lastWord = words[words.length - 1];
+                
+                if (currentPrediction) {
+                    currentText = currentText.substring(0, currentText.length - lastWord.length) + currentPrediction;
+                    updateFrequency(currentPrediction);
+                    currentPrediction = "";
+                    currentText += "\u00A0"; 
+                }
+                updatePrediction();
+            }
             else if (boardState === 'SPEAK_PENDING') {
                 if ('speechSynthesis' in window && currentText.trim() !== "") {
                     window.speechSynthesis.cancel();
@@ -433,7 +444,7 @@
             if (boardState === 'MAIN') return ['b-blue', 'b-yellow', 'b-white', 'b-green', 'b-black', 'b-red', 'b-delete', 'b-space', 'text-box'];
             else if (boardState === 'SUB') return ['b-blue', 'b-yellow', 'b-white', 'b-green', 'b-black', 'b-red', 'b-delete'];
             else if (boardState === 'DELETE_PENDING') return ['b-accept', 'b-space', 'b-delete'];
-            else if (boardState === 'CLEAR_PENDING' || boardState === 'SPACE_PENDING' || boardState === 'SPEAK_PENDING') return ['b-accept', 'b-delete'];
+            else if (boardState === 'CLEAR_PENDING' || boardState === 'SPACE_PENDING' || boardState === 'SPEAK_PENDING' || boardState === 'PREDICTION_PENDING') return ['b-accept', 'b-delete'];
             return [];
         }
 
