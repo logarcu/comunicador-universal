@@ -10,13 +10,13 @@
   "description": "Comunicador visual accesible con modos manual, secuencial por cámara y mando de televisión.",
   "icons": [
     {
-      "src": "https://dummyimage.com/192x192/ffffff/00aaff.png&text=Comunicador",
+      "src": "icon-512.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://dummyimage.com/512x512/ffffff/00aaff.png&text=Comunicador",
+      "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -24,8 +24,8 @@
   ],
   "screenshots": [
     {
-      "src": "https://dummyimage.com/1280x720/ffffff/000000.png&text=Comunicador",
-      "sizes": "1280x720",
+      "src": "icon-512.png",
+      "sizes": "512x512",
       "type": "image/png",
       "form_factor": "wide"
     }
